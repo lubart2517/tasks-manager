@@ -1,0 +1,549 @@
+[
+  {
+    "model": "home.tasktype",
+    "pk": 1,
+    "fields": {
+      "name": "Bug"
+    }
+  },
+  {
+    "model": "home.tasktype",
+    "pk": 2,
+    "fields": {
+      "name": "New feature"
+    }
+  },
+  {
+    "model": "home.tasktype",
+    "pk": 3,
+    "fields": {
+      "name": "Breaking change"
+    }
+  },
+  {
+    "model": "home.tasktype",
+    "pk": 4,
+    "fields": {
+      "name": "Refactoring"
+    }
+  },
+  {
+    "model": "home.tasktype",
+    "pk": 5,
+    "fields": {
+      "name": "QA"
+    }
+  },
+  {
+    "model": "home.position",
+    "pk": 1,
+    "fields": {
+      "name": "Django developer"
+    }
+  },
+  {
+    "model": "home.position",
+    "pk": 2,
+    "fields": {
+      "name": "Project manager"
+    }
+  },
+  {
+    "model": "home.position",
+    "pk": 3,
+    "fields": {
+      "name": "QA"
+    }
+  },
+  {
+    "model": "home.position",
+    "pk": 4,
+    "fields": {
+      "name": "Designer"
+    }
+  },
+  {
+    "model": "home.position",
+    "pk": 5,
+    "fields": {
+      "name": "DevOps"
+    }
+  },
+  {
+    "model": "home.position",
+    "pk": 6,
+    "fields": {
+      "name": "Front-end developer"
+    }
+  },
+  {
+    "model": "home.worker",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$6uM28XWOFX6ewyloJzjqmt$L+ZhofPylneoaL2iZS4sZu4ZMUNb4oIevfAdzOMn/eE=",
+      "last_login": "2023-08-08T14:14:03Z",
+      "is_superuser": true,
+      "username": "admin.user",
+      "first_name": "Admin",
+      "last_name": "User",
+      "email": "admin.user@tasks.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2022-08-08T13:58:29Z",
+      "position": 1,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "home.worker",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$73Z1Y57bcoscZ37s9rE9v0$4SEQ0TtXwJKzO5/CRdFSrTifatiPjkZ38gM2H8Kqsdg=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "joyce.byers",
+      "first_name": "Joyce",
+      "last_name": "Byers",
+      "email": "joyce.byers@tasks.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-08T14:17:04Z",
+      "position": 2,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "home.worker",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$QtPol3T7x9quBj4BnbnVwW$UwT4kihkRfSvQEWEeuqVKwMgis2ikKVZfJDBcQMvOKY=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "jim.hopper",
+      "first_name": "Jim",
+      "last_name": "Hopper",
+      "email": "jim.hopper@taxi.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-08T14:19:09Z",
+      "position": 3,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "home.worker",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l1$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "jonathan.byers",
+      "first_name": "Jonathan",
+      "last_name": "Byers",
+      "email": "jonathan.byers@taxi.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-08T14:19:09Z",
+      "position": 4,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "home.worker",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l1$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "dustin.henderson",
+      "first_name": "Dustin",
+      "last_name": "Henderson",
+      "email": "dustin.henderson@taxi.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "position": 5,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "home.worker",
+    "pk": 6,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "mike.wheeler",
+      "first_name": "Mike",
+      "last_name": "Wheeler",
+      "email": "mike.wheeler@taxi.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "position": 1,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "home.worker",
+    "pk": 7,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "lucas.sinclair",
+      "first_name": "Lucas",
+      "last_name": "Sinclair",
+      "email": "lucas.sinclair@taxi.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "position": 2,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "home.worker",
+    "pk": 8,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "nancy.wheeler",
+      "first_name": "Nancy",
+      "last_name": "Wheeler",
+      "email": "nancy.wheeler@taxi.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "position": 3,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "home.worker",
+    "pk": 9,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "martin.brenner",
+      "first_name": "Martin",
+      "last_name": "Brenner",
+      "email": "martin.brenner@taxi.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "position": 4,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "home.worker",
+    "pk": 10,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "billy.hargrove",
+      "first_name": "Billy",
+      "last_name": "Hargrove",
+      "email": "billy.hargrove@taxi.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "position": 5,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "home.worker",
+    "pk": 11,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "bob.newby",
+      "first_name": "Bob",
+      "last_name": "Newby",
+      "email": "bob.newby@taxi.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "position": 6,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "home.team",
+    "pk": 1,
+    "fields": {
+      "name": "Mad Goblins",
+      "teammates": [1, 2, 3, 6]
+    }
+  },
+  {
+    "model": "home.team",
+    "pk": 2,
+    "fields": {
+      "name": "Gentle gnomes",
+      "teammates": [4, 5, 7, 8]
+    }
+  },
+  {
+    "model": "home.team",
+    "pk": 3,
+    "fields": {
+      "name": "Stylish elves",
+      "teammates": [1, 9, 10, 11]
+    }
+  },
+  {
+    "model": "home.project",
+    "pk": 1,
+    "fields": {
+      "name": "Online banking system",
+      "description": "Our goal is to create simple online banking system which could be quickly integrated into several existing projects",
+      "team": 1
+    }
+  },
+  {
+    "model": "home.project",
+    "pk": 2,
+    "fields": {
+      "name": "Simple AI translator",
+      "description": "You have to implement simple AI translator to translate model fields on different languages properly",
+      "team": 2
+    }
+  },
+  {
+    "model": "home.project",
+    "pk": 3,
+    "fields": {
+      "name": "Telegram chat-bot for online store",
+      "description": "On the basis of database of conversations ours support team with clients, create telegram chat-bot",
+      "team": 3
+    }
+  },
+  {
+    "model": "home.task",
+    "pk": 1,
+    "fields": {
+      "name": "Create database schema",
+      "description": "Consider al necessary models and their fields for this project, make schema and post it.",
+      "deadline": "2023-10-10",
+      "is_completed": false,
+      "priority": "High",
+      "task_type": 2,
+      "project": 1,
+      "assignees": [1, 6]
+    }
+  },
+  {
+    "model": "home.task",
+    "pk": 2,
+    "fields": {
+      "name": "Fix login bug",
+      "description": "Investigate and fix the login bug reported by a user.",
+      "deadline": "2023-10-15",
+      "is_completed": false,
+      "priority": "Medium",
+      "task_type": 1,
+      "project": 1,
+      "assignees": [2]
+    }
+  },
+  {
+    "model": "home.task",
+    "pk": 3,
+    "fields": {
+      "name": "Design homepage",
+      "description": "Create a visually appealing design for the homepage of the website.",
+      "deadline": "2023-10-20",
+      "is_completed": false,
+      "priority": "High",
+      "task_type": 4,
+      "project": 1,
+      "assignees": [6]
+    }
+  },
+  {
+    "model": "home.task",
+    "pk": 4,
+    "fields": {
+      "name": "Write API documentation",
+      "description": "Document the API endpoints for the online banking system.",
+      "deadline": "2023-10-25",
+      "is_completed": false,
+      "priority": "Medium",
+      "task_type": 3,
+      "project": 1,
+      "assignees": [3]
+    }
+  },
+  {
+    "model": "home.task",
+    "pk": 5,
+    "fields": {
+      "name": "Implement language detection",
+      "description": "Add language detection functionality to the AI translator.",
+      "deadline": "2023-10-18",
+      "is_completed": false,
+      "priority": "High",
+      "task_type": 2,
+      "project": 2,
+      "assignees": [5]
+    }
+  },
+  {
+    "model": "home.task",
+    "pk": 6,
+    "fields": {
+      "name": "Create chat-bot conversation flows",
+      "description": "Define conversation flows for the chat-bot based on support team data.",
+      "deadline": "2023-10-30",
+      "is_completed": false,
+      "priority": "Medium",
+      "task_type": 1,
+      "project": 3,
+      "assignees": [9]
+    }
+  },
+  {
+    "model": "home.task",
+    "pk": 7,
+    "fields": {
+      "name": "Optimize database queries",
+      "description": "Optimize the database queries for the online banking system.",
+      "deadline": "2023-10-22",
+      "is_completed": false,
+      "priority": "High",
+      "task_type": 4,
+      "project": 1,
+      "assignees": [1]
+    }
+  },
+  {
+    "model": "home.task",
+    "pk": 8,
+    "fields": {
+      "name": "Translate error messages",
+      "description": "Translate error messages into multiple languages for better user experience.",
+      "deadline": "2023-10-28",
+      "is_completed": false,
+      "priority": "Medium",
+      "task_type": 5,
+      "project": 1,
+      "assignees": [2]
+    }
+  },
+  {
+    "model": "home.task",
+    "pk": 9,
+    "fields": {
+      "name": "Test chat-bot functionality",
+      "description": "Thoroughly test the functionality of the chat-bot in different scenarios.",
+      "deadline": "2023-11-05",
+      "is_completed": false,
+      "priority": "High",
+      "task_type": 3,
+      "project": 3,
+      "assignees": [11]
+    }
+  },
+  {
+    "model": "home.task",
+    "pk": 10,
+    "fields": {
+      "name": "Create user onboarding flow",
+      "description": "Design and implement a user onboarding flow for the online banking system.",
+      "deadline": "2023-10-29",
+      "is_completed": false,
+      "priority": "Medium",
+      "task_type": 2,
+      "project": 1,
+      "assignees": [2]
+    }
+  },
+  {
+    "model": "home.task",
+    "pk": 11,
+    "fields": {
+      "name": "Refactor AI translator code",
+      "description": "Refactor the codebase of the AI translator for better maintainability.",
+      "deadline": "2023-10-24",
+      "is_completed": false,
+      "priority": "High",
+      "task_type": 4,
+      "project": 2,
+      "assignees": [5]
+    }
+  },
+  {
+    "model": "home.task",
+    "pk": 12,
+    "fields": {
+      "name": "Review chat-bot performance",
+      "description": "Review the performance of the chat-bot and make necessary improvements.",
+      "deadline": "2023-11-10",
+      "is_completed": false,
+      "priority": "Medium",
+      "task_type": 1,
+      "project": 3,
+      "assignees": [1]
+    }
+  },
+  {
+    "model": "home.task",
+    "pk": 13,
+    "fields": {
+      "name": "Security audit",
+      "description": "Conduct a security audit for the online banking system.",
+      "deadline": "2023-11-02",
+      "is_completed": false,
+      "priority": "High",
+      "task_type": 3,
+      "project": 1,
+      "assignees": [1]
+    }
+  },
+  {
+    "model": "home.task",
+    "pk": 14,
+    "fields": {
+      "name": "Performance testing",
+      "description": "Perform performance testing on the AI translator to ensure scalability.",
+      "deadline": "2023-10-31",
+      "is_completed": false,
+      "priority": "High",
+      "task_type": 5,
+      "project": 2,
+      "assignees": [7]
+    }
+  },
+  {
+    "model": "home.task",
+    "pk": 15,
+    "fields": {
+      "name": "Create user feedback system",
+      "description": "Implement a user feedback system for the online banking system.",
+      "deadline": "2023-11-05",
+      "is_completed": false,
+      "priority": "Medium",
+      "task_type": 2,
+      "project": 1,
+      "assignees": [3]
+    }
+  }
+]
