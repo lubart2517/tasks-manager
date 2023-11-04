@@ -12824,6 +12824,7 @@ textarea.form-control-lg {
 
 .avatar {
   color: #fff;
+  background: #0dcaf0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -17301,3 +17302,11 @@ pre[class*="language-"] {
     overflow: auto !important; } }
 
 /*# sourceMappingURL=soft-ui-dashboard.css.map */
+
+.style-green{
+color: var(--bs-green);
+}
+
+.style-white{
+color: var(--bs-white);
+}

@@ -1,0 +1,118 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header pb-0">
+          <h6>Project {{project.name}} by team <a href="{% url 'home:team-detail' pk=project.team.id %}" class="style-green">{{project.team.name}}</a></h6>
+          <p>{{project.description}}</p>
+          <h6>Workers</h6>
+        </div>
+        <div class="card-body px-0 pt-0 pb-2">
+          <div class="table-responsive p-0">
+            <table class="table align-items-center mb-0">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Worker</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Position</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Joined</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for teammate in project.team.teammates.all %}
+                <tr>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm"><a href="{% url 'home:worker-detail' pk=teammate.id %}" class="style-green" >{{teammate.first_name}} {{teammate.last_name}}</a></h6>
+                        <p class="text-xs text-secondary mb-0">{{teammate.email}}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="text-xs text-secondary mb-0">{{teammate.position}}</p>
+                  </td>
+                  <td class="align-middle text-center text-sm">
+                    {% if teammate.check_if_online %}
+                    <span class="badge badge-sm bg-gradient-success">Online</span>
+                    {% else %}
+                    <span class="badge badge-sm bg-gradient-secondary">Offline</span>
+                    {% endif %}
+                  </td>
+                  <td class="align-middle text-center">
+                    <span class="text-secondary text-xs font-weight-bold">{{teammate.date_joined}}</span>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header pb-0">
+          <h6>Project tasks</h6>
+        </div>
+        <div class="card-body px-0 pt-0 pb-2">
+          <div class="table-responsive p-0">
+            <table class="table align-items-center justify-content-center mb-0">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7">Task</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Deadline</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Completion</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Priority</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Type</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for task in project.tasks.all %}
+                <tr>
+                  <td class="align-middle text-center">
+                    <div class="d-flex px-2">
+                      <div>
+                        <a href="{% url 'home:task-detail' pk=task.id %}" class="avatar avatar-sm rounded-circle" title={{task}}>
+                            {{task.task_type.name.0}}
+                        </a>
+                      </div>
+                      <div class="my-auto">
+                        <h6 class="mb-0 text-sm"><a href="{% url 'home:task-detail' pk=task.id %}" class="style-white" >
+                            {{task.name}}
+                        </a></h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="align-middle text-center">
+                    <span class="text-xs font-weight-bold">{{task.deadline}}</span>
+                  </td>
+                  <td class="align-middle text-center">
+                    <span class="text-xs font-weight-bold">{% if task.is_completed %}Completed {% else %} Not completed {% endif%}</span>
+                  </td>
+                  <td class="align-middle text-center">
+                    <span class="text-xs font-weight-bold">{{task.priority}}</span>
+                  </td>
+                  <td class="align-middle text-center">
+                    <span class="text-xs font-weight-bold">{{task.task_type.name}}</span>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% include "includes/footer.html" %}
+    
+  </div>
+  {% endblock content %}

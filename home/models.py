@@ -1,7 +1,10 @@
+import datetime
+from django.utils import timezone
 from django.db import models
-
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.urls import reverse
+from django.utils.functional import cached_property
 
 
 class TaskType(models.Model):
@@ -39,12 +42,20 @@ class Worker(AbstractUser):
         return f"{self.username} ({self.first_name} {self.last_name})"
 
     def get_absolute_url(self) -> str:
-        return reverse("tasks:worker-detail", kwargs={"pk": self.pk})
+        return reverse("home:worker-detail", kwargs={"pk": self.pk})
+
+    def check_if_online(self) -> bool:
+        last_login = self.last_login
+        if last_login:
+            now = timezone.now()
+            if now - last_login <= datetime.timedelta(seconds=settings.SESSION_EXPIRE_SECONDS):
+                return True
+        return False
 
 
 class Team(models.Model):
     name = models.CharField(max_length=255, unique=True)
-    teammates = models.ManyToManyField(Worker)
+    teammates = models.ManyToManyField(Worker, related_name="teams")
 
     def __str__(self) -> str:
         return f"{self.name}"
@@ -61,6 +72,14 @@ class Project(models.Model):
 
     def __str__(self) -> str:
         return f"{self.name}"
+
+    @cached_property
+    def get_completion(self) -> int:
+        total = self.tasks.all()
+        completed = total.filter(
+            is_completed=True
+        )
+        return int(round((completed.count() / total.count())/5.0 * 100, 0)*5.0)
 
 
 class Task(models.Model):
