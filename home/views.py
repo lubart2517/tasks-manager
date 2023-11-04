@@ -1,8 +1,57 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views import generic
+from .models import Project, Team, Worker, Task
 
 
 def index(request):
 
+
+    tasks = Task.objects.all().order_by("deadline").select_related("task_type", "project")
+    tasks_styles = {
+        "Bug": "ni-html5 text-danger",
+        "New feature": "ni-cart text-info",
+        "Breaking change": "ni-credit-card text-warning",
+        "Refactoring": "ni-key-25 text-primary",
+        "QA": "ni-bell-55 text-success"
+    }
+    tasks_with_style = [(task, tasks_styles[task.task_type.name]) for task in tasks]
+    teams = Team.objects.all()
+    workers = Worker.objects.all()
+    projects = Project.objects.all().select_related("team").prefetch_related("tasks")
+    context = {
+        "projects": projects,
+        "teams": teams,
+        "workers": workers,
+        "tasks": tasks_with_style,
+    }
+
     # Page from the theme 
-    return render(request, 'pages/index.html')
+    return render(request, 'pages/index.html', context=context)
+
+
+class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Worker
+
+
+class ProjectDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Project
+    queryset = Project.objects.select_related("team").prefetch_related("tasks__task_type", "team__teammates__position").all()
+
+
+class TaskDetailView(LoginRequiredMixin, generic.DetailView):
+    queryset = Task.objects.select_related("task_type", "project", "project__team").prefetch_related("assignees__position").all()
+
+
+def team_detail_view(request: dict, pk: int) -> str:
+    team = Team.objects.get(id=pk)
+    context = {
+        "projects": team.projects.all(),
+        "team": team,
+    }
+
+    # Page from the theme
+    return render(request, 'home/team_detail.html', context=context)
+
+
