@@ -33,3 +33,6 @@ class TaskAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Project)
+admin.site.register(TaskType)
+admin.site.register(Position)
+admin.site.register(Team)
