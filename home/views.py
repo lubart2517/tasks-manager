@@ -8,8 +8,8 @@ from .models import Project, Team, Worker, Task
 from .forms import TaskForm, ProjectForm
 from django import forms
 
-def index(request):
 
+def index(request):
 
     tasks = Task.objects.all().order_by("deadline").select_related(
         "task_type",
@@ -39,6 +39,19 @@ def index(request):
 
 class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
     model = Worker
+    queryset = (Worker.objects.
+                select_related("position").
+                prefetch_related(
+                    "tasks__task_type",
+                ).all())
+
+    def get_context_data(self, **kwargs) -> dict:
+        context = super(WorkerDetailView, self).get_context_data(**kwargs)
+        not_completed = Task.objects.filter(is_completed=False, assignees__id=self.object.id)
+        completed = Task.objects.filter(is_completed=True, assignees__id=self.object.id)
+        context["not_completed"] = not_completed
+        context["completed"] = completed
+        return context
 
 
 class ProjectDetailView(LoginRequiredMixin, FormMixin, generic.DetailView):
@@ -95,20 +108,8 @@ def task_complete(request: dict, pk: int):
         messages.success(request, 'Changes successfully saved.')
         return HttpResponseRedirect(reverse("home:task-detail", args=(pk,)))
     else:
-        messages.error(request, "Only task assignees can do it")
+        messages.error(request, "Only task assignee can complete task")
         return HttpResponseRedirect(reverse("home:task-detail", args=(pk,)))
-
-
-
-def team_detail_view(request: dict, pk: int) -> str:
-    team = Team.objects.get(id=pk)
-    context = {
-        "projects": team.projects.all(),
-        "team": team,
-    }
-
-    # Page from the theme
-    return render(request, 'home/team_detail.html', context=context)
 
 
 class TeamDetailView(LoginRequiredMixin, FormMixin, generic.DetailView):
