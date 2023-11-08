@@ -103,6 +103,7 @@
       </div>
     </div>
   </div>
+  {% if request.user in team.teammates.all %}
   <div class="row">
     <div class="col-12">
       <div class="card mb-4">
@@ -120,5 +121,6 @@
         </div>
       </div>
     </div>
+    {% endif %}
     {% include "includes/footer.html" %}
   {% endblock content %}
