@@ -43,7 +43,7 @@
                     {% endif %}
                   </td>
                   <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold">{{worker.date_joined}}</span>
+                    <span class="text-secondary text-xs font-weight-bold">{{teammate.date_joined}}</span>
                   </td>
                 </tr>
                 {% endfor %}
@@ -62,7 +62,7 @@
         </div>
         <div class="card-body px-0 pt-0 pb-2">
           <div class="table-responsive p-0">
-            <table class="table align-items-center justify-content-center mb-0">
+            <table class="table align-items-center justify-content-center mb-1">
               <thead>
                 <tr>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7">Project</th>
@@ -79,8 +79,8 @@
                         <h6 class="mb-0 text-sm"><a href="{% url 'home:project-detail' pk=project.id %}" class="style-green" >{{project.name}}</a></h6>
                       </div>
                   </td>
-                  <td class="align-middle text-center">
-                    <span class="text-xs font-weight-bold">{{project.description}}</span>
+                  <td class="align-middle text-left">
+                    <span class="text-xs text-wrap">{{project.description}}</span>
                   </td>
                   <td class="align-middle">
                     <div class="progress-wrapper w-75 mx-auto">

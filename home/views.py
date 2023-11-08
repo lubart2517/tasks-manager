@@ -1,9 +1,11 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import FormMixin
 from django.views import generic
 from .models import Project, Team, Worker, Task
-
+from .forms import TaskForm
+from django import forms
 
 def index(request):
 
@@ -35,13 +37,50 @@ class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
     model = Worker
 
 
-class ProjectDetailView(LoginRequiredMixin, generic.DetailView):
+class ProjectDetailView(LoginRequiredMixin, FormMixin, generic.DetailView):
     model = Project
-    queryset = Project.objects.select_related("team").prefetch_related("tasks__task_type", "team__teammates__position").all()
+    queryset = (Project.objects.
+                select_related("team").
+                prefetch_related(
+                    "tasks__task_type",
+                    "team__teammates__position"
+                ).all())
+
+    form_class = TaskForm
+
+    def get_success_url(self) -> str:
+        return reverse("home:project-detail", kwargs={"pk": self.object.id})
+
+    def get_context_data(self, **kwargs) -> dict:
+        context = super(ProjectDetailView, self).get_context_data(**kwargs)
+        form = TaskForm(self.object.team.id, initial={
+            "project": self.object
+        })
+        form.fields["project"].widget = forms.HiddenInput()
+        context["form"] = form
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if not request.user.is_authenticated:
+            return self.form_invalid(form)
+        if form.is_valid():
+            return self.form_valid(form)
+        return self.form_invalid(form)
+
+    def form_valid(self, form):
+        form.save()
+        return super(ProjectDetailView, self).form_valid(form)
 
 
 class TaskDetailView(LoginRequiredMixin, generic.DetailView):
-    queryset = Task.objects.select_related("task_type", "project", "project__team").prefetch_related("assignees__position").all()
+    queryset = (Task.objects.
+                select_related(
+                    "task_type",
+                    "project",
+                    "project__team"
+                    ).prefetch_related("assignees__position").all())
 
 
 def team_detail_view(request: dict, pk: int) -> str:
