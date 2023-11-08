@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import FormMixin
 from django.views import generic
+from django.contrib import messages
 from .models import Project, Team, Worker, Task
 from .forms import TaskForm
 from django import forms
@@ -10,7 +11,10 @@ from django import forms
 def index(request):
 
 
-    tasks = Task.objects.all().order_by("deadline").select_related("task_type", "project")
+    tasks = Task.objects.all().order_by("deadline").select_related(
+        "task_type",
+        "project"
+    )
     tasks_styles = {
         "Bug": "ni-html5 text-danger",
         "New feature": "ni-cart text-info",
@@ -81,6 +85,19 @@ class TaskDetailView(LoginRequiredMixin, generic.DetailView):
                     "project",
                     "project__team"
                     ).prefetch_related("assignees__position").all())
+
+
+def task_complete(request: dict, pk: int):
+    task = Task.objects.get(id=pk)
+    if request.user in task.assignees.all():
+        task.is_completed = True
+        task.save()
+        messages.success(request, 'Changes successfully saved.')
+        return HttpResponseRedirect(reverse("home:task-detail", args=(pk,)))
+    else:
+        messages.error(request, "Only task assignees can do it")
+        return HttpResponseRedirect(reverse("home:task-detail", args=(pk,)))
+
 
 
 def team_detail_view(request: dict, pk: int) -> str:
