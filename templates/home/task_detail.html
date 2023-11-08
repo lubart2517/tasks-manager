@@ -8,6 +8,12 @@
         <span class="mask bg-gradient-primary opacity-6"></span>
       </div>
       <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}"
+                     role="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
         <div class="row gx-4">
           <div class="col-auto my-auto">
             <div class="h-100">
@@ -61,6 +67,9 @@
         </div>
         <div class="col-12 col-xl-4">
           <div class="card h-100">
+            <div class="card-header pb-0 p-3">
+              <a href="{% url 'home:task-complete' pk=task.id %}" class="badge badge-sm bg-gradient-success" >Complete task</a>
+            </div>
             <div class="card-header pb-0 p-3">
               <h6 class="mb-0">Workers</h6>
             </div>
