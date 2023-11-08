@@ -79,6 +79,8 @@ class Project(models.Model):
         completed = total.filter(
             is_completed=True
         )
+        if total.count() == 0:
+            return 0
         return int(round((completed.count() / total.count())/5.0 * 100, 0)*5.0)
 
 

@@ -5,7 +5,7 @@ from django.views.generic.edit import FormMixin
 from django.views import generic
 from django.contrib import messages
 from .models import Project, Team, Worker, Task
-from .forms import TaskForm
+from .forms import TaskForm, ProjectForm
 from django import forms
 
 def index(request):
@@ -110,4 +110,35 @@ def team_detail_view(request: dict, pk: int) -> str:
     # Page from the theme
     return render(request, 'home/team_detail.html', context=context)
 
+
+class TeamDetailView(LoginRequiredMixin, FormMixin, generic.DetailView):
+    model = Team
+    queryset = Team.objects.all()
+
+    form_class = ProjectForm
+
+    def get_success_url(self) -> str:
+        return reverse("home:team-detail", kwargs={"pk": self.object.id})
+
+    def get_context_data(self, **kwargs) -> dict:
+        context = super(TeamDetailView, self).get_context_data(**kwargs)
+        form = ProjectForm( initial={
+            "team": self.object
+        })
+        form.fields["team"].widget = forms.HiddenInput()
+        context["form"] = form
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if not request.user.is_authenticated:
+            return self.form_invalid(form)
+        if form.is_valid():
+            return self.form_valid(form)
+        return self.form_invalid(form)
+
+    def form_valid(self, form):
+        form.save()
+        return super(TeamDetailView, self).form_valid(form)
 

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Task, TaskType, Worker
+from .models import Task, TaskType, Worker, Project
 
 
 class TaskForm(forms.ModelForm):
@@ -13,4 +13,10 @@ class TaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
+        fields = "__all__"
+
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
         fields = "__all__"
