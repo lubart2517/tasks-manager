@@ -131,7 +131,7 @@
                     <p class="mb-0 text-s">Description: {{task.description}}</p>
                     <p class="mb-0 text-s">Project: {{task.project}}</p>
                     <p class="mb-0 text-s">Priority: {{task.priority}}</p>
-                    <p class="mb-0 text-s">Completed: {{task.is_completed}}</p>
+                    <p class="mb-0 text-s">Is completed: {% if task.is_completed %}Completed {% else %} Not completed {% endif%}</p>
                   </div>
                 </li>
                 {% endfor %}
@@ -154,7 +154,7 @@
                     <p class="mb-0 text-s">Description: {{task.description}}</p>
                     <p class="mb-0 text-s">Project: {{task.project}}</p>
                     <p class="mb-0 text-s">Priority: {{task.priority}}</p>
-                    <p class="mb-0 text-s">Completed: {{task.is_completed}}</p>
+                    <p class="mb-0 text-s">Is completed: {% if task.is_completed %}Completed {% else %} Not completed {% endif%}</p>
                   </div>
                 </li>
                 {% endfor %}
