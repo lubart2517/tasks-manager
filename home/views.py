@@ -1,10 +1,10 @@
 from django.shortcuts import render, HttpResponseRedirect
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import FormMixin
 from django.views import generic
 from django.contrib import messages
-from django.db.models import F, Count, Q
+from django.db.models import Count, Q
 from django import forms
 
 from .models import Project, Team, Worker, Task
@@ -98,12 +98,15 @@ class ProjectDetailView(LoginRequiredMixin, FormMixin, generic.DetailView):
 
 
 class TaskDetailView(LoginRequiredMixin, generic.DetailView):
-    queryset = (Task.objects.
-                select_related(
-                    "task_type",
-                    "project",
-                    "project__team"
-                    ).prefetch_related("assignees__position").all())
+    queryset = (
+        Task.objects.
+        select_related(
+            "task_type",
+            "project",
+            "project__team"
+            ).
+        prefetch_related("assignees__position").all()
+    )
 
 
 def task_complete(request: dict, pk: int):
@@ -129,9 +132,11 @@ class TeamDetailView(LoginRequiredMixin, FormMixin, generic.DetailView):
 
     def get_context_data(self, **kwargs) -> dict:
         context = super(TeamDetailView, self).get_context_data(**kwargs)
-        form = ProjectForm( initial={
-            "team": self.object
-        })
+        form = ProjectForm(
+            initial={
+                "team": self.object
+            }
+        )
         form.fields["team"].widget = forms.HiddenInput()
         context["form"] = form
         return context
@@ -148,4 +153,3 @@ class TeamDetailView(LoginRequiredMixin, FormMixin, generic.DetailView):
     def form_valid(self, form):
         form.save()
         return super(TeamDetailView, self).form_valid(form)
-

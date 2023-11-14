@@ -1,3 +1,6 @@
+This project is based on 
+
+
 # [Django Soft Dashboard](https://appseed.us/product/soft-ui-dashboard/django/)
 
 Open-source **[Django Dashboard](https://appseed.us/admin-dashboards/django/)** crafted on top of **Soft UI Dashboard**, an open-source `Bootstrap 5` design from `Creative-Tim`.
@@ -51,6 +54,7 @@ $ pip install -r requirements.txt
 ```bash
 $ python manage.py makemigrations
 $ python manage.py migrate
+$ python manage.py tasks_manager_data.json
 ```
 
 <br />
@@ -102,7 +106,7 @@ The project is coded using a simple and intuitive structure presented below:
    |
    |-- requirements.txt   # Project Dependencies
    |
-   |-- env.sample         # ENV Configuration (default values)
+   |-- .env         # ENV Configuration (default values)
    |-- manage.py          # Start the app - Django default start script
    |
    |-- ************************************************************************
