@@ -54,7 +54,7 @@ $ pip install -r requirements.txt
 ```bash
 $ python manage.py makemigrations
 $ python manage.py migrate
-$ python manage.py tasks_manager_data.json
+$ python manage.py loaddata tasks_manager_data.json
 ```
 
 <br />

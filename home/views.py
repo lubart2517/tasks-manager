@@ -6,7 +6,6 @@ from django.views import generic
 from django.contrib import messages
 from django.db.models import Count, Q
 from django import forms
-
 from .models import Project, Team, Worker, Task
 from .forms import TaskForm, ProjectForm
 
@@ -40,7 +39,7 @@ def index(request):
         "projects": projects,
         "teams": teams,
         "workers": workers,
-        "tasks": tasks_with_style,
+        "tasks": tasks_with_style
     }
 
     # Page from the theme 

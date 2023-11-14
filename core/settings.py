@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 import os, random, string
+import dj_database_url
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -18,7 +19,10 @@ load_dotenv()  # take environment variables from .env.
 
 # Build paths inside the project like this: BASE_DIR / "subdir".
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+if str(os.getenv("DEBUG")) == "False":
+    DEBUG = False
+else:
+    DEBUG = True
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -27,8 +31,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 if not SECRET_KEY:
     SECRET_KEY = "".join(random.choice( string.ascii_lowercase  ) for i in range( 32 ))
 
-# Render Deployment Code
-DEBUG = os.environ.get("DEBUG")
+
 
 # HOSTs List
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
@@ -95,32 +98,16 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DB_ENGINE   = os.getenv("DB_ENGINE"   , None)
-DB_USERNAME = os.getenv("DB_USERNAME" , None)
-DB_PASS     = os.getenv("DB_PASS"     , None)
-DB_HOST     = os.getenv("DB_HOST"     , None)
-DB_PORT     = os.getenv("DB_PORT"     , None)
-DB_NAME     = os.getenv("DB_NAME"     , None)
+db_from_env = dj_database_url.config(conn_max_age=500)
 
-if DB_ENGINE and DB_NAME and DB_USERNAME:
-    DATABASES = { 
-      "default": {
-        "ENGINE"  : "django.db.backends." + DB_ENGINE, 
-        "NAME"    : DB_NAME,
-        "USER"    : DB_USERNAME,
-        "PASSWORD": DB_PASS,
-        "HOST"    : DB_HOST,
-        "PORT"    : DB_PORT,
-        }, 
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "db.sqlite3",
     }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": "db.sqlite3",
-        }
-    }
+}
 
+DATABASES["default"].update(db_from_env)
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
