@@ -73,16 +73,6 @@ class Project(models.Model):
     def __str__(self) -> str:
         return f"{self.name}"
 
-    @cached_property
-    def get_completion(self) -> int:
-        total = self.tasks.all()
-        completed = total.filter(
-            is_completed=True
-        )
-        if total.count() == 0:
-            return 0
-        return int(round((completed.count() / total.count())/5.0 * 100, 0)*5.0)
-
 
 class Task(models.Model):
     name = models.CharField(max_length=255, unique=True)

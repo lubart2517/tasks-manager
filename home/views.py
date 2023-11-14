@@ -4,9 +4,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import FormMixin
 from django.views import generic
 from django.contrib import messages
+from django.db.models import F, Count, Q
+from django import forms
+
 from .models import Project, Team, Worker, Task
 from .forms import TaskForm, ProjectForm
-from django import forms
 
 
 def index(request):
@@ -23,9 +25,17 @@ def index(request):
         "QA": "ni-bell-55 text-success"
     }
     tasks_with_style = [(task, tasks_styles[task.task_type.name]) for task in tasks]
-    teams = Team.objects.all()
+    teams = Team.objects.all().prefetch_related("teammates__position")
     workers = Worker.objects.all()
-    projects = Project.objects.all().select_related("team").prefetch_related("tasks")
+    projects = (
+        Project.objects.all().
+        select_related("team").
+        prefetch_related("tasks", "team__teammates").
+        annotate(
+            completed_tasks=(Count("tasks", filter=Q(tasks__is_completed=True))),
+            all_tasks=Count("tasks")
+                    )
+    )
     context = {
         "projects": projects,
         "teams": teams,
@@ -39,19 +49,15 @@ def index(request):
 
 class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
     model = Worker
-    queryset = (Worker.objects.
-                select_related("position").
-                prefetch_related(
-                    "tasks__task_type",
-                ).all())
-
-    def get_context_data(self, **kwargs) -> dict:
-        context = super(WorkerDetailView, self).get_context_data(**kwargs)
-        not_completed = Task.objects.filter(is_completed=False, assignees__id=self.object.id)
-        completed = Task.objects.filter(is_completed=True, assignees__id=self.object.id)
-        context["not_completed"] = not_completed
-        context["completed"] = completed
-        return context
+    queryset = (
+        Worker.objects.all().
+        select_related("position").
+        prefetch_related(
+            "teams__teammates",
+            "tasks__task_type",
+            "tasks__project"
+        )
+    )
 
 
 class ProjectDetailView(LoginRequiredMixin, FormMixin, generic.DetailView):
@@ -114,7 +120,7 @@ def task_complete(request: dict, pk: int):
 
 class TeamDetailView(LoginRequiredMixin, FormMixin, generic.DetailView):
     model = Team
-    queryset = Team.objects.all()
+    queryset = Team.objects.all().prefetch_related("teammates__position")
 
     form_class = ProjectForm
 

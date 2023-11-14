@@ -1,5 +1,6 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
+{% load db_query_processors %}
 
 {% block content %}
 
@@ -109,11 +110,17 @@
                         <div class="progress-wrapper w-75 mx-auto">
                           <div class="progress-info">
                             <div class="progress-percentage">
-                              <span class="text-xs font-weight-bold">{{ project.get_completion }}</span>
+                              <span class="text-xs font-weight-bold">
+                                {{ project.completed_tasks|round_completion:project.all_tasks}}
+                              </span>
                             </div>
                           </div>
                           <div class="progress">
-                            <div class="progress-bar bg-gradient-info w-{{ project.get_completion }}" role="progressbar" aria-valuenow="{{ project.get_completion }}" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-gradient-info
+                            w-{{ project.completed_tasks|round_completion:project.all_tasks }}"
+                                 role="progressbar"
+                                 aria-valuenow="{{ project.completed_tasks|round_completion:project.all_tasks }}"
+                                 aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>
                       </td>
