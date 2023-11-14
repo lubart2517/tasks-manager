@@ -27,7 +27,7 @@ else:
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = os.environ["SECRET_KEY"]
 if not SECRET_KEY:
     SECRET_KEY = "".join(random.choice( string.ascii_lowercase  ) for i in range( 32 ))
 
@@ -36,8 +36,15 @@ if not SECRET_KEY:
 # HOSTs List
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
+
+
 # Add here your deployment HOSTS
 CSRF_TRUSTED_ORIGINS = ["http://localhost:8000", "http://localhost:5085", "http://127.0.0.1:8000", "http://127.0.0.1:5085"]
+
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+    CSRF_TRUSTED_ORIGINS.append(RENDER_EXTERNAL_HOSTNAME)
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 if RENDER_EXTERNAL_HOSTNAME:    
