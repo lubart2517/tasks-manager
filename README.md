@@ -1,10 +1,23 @@
-This project is based on 
+link to render https://tasks-manager-rslc.onrender.com/
 
+Task Manager can handle possible problems during product development in teams. 
+Everyone from the team can create Task, assign this Task to team-members, and mark 
+the Task as done(only task assignees can do it). 
+Also, team members should add new Project for their team. 
+For each worker it is shown separately: completed and not completed tasks, worker Team
+and personal info. For each Team we can see team members, their positions,
+are they online or not. Also, all team projects are shown.
+
+This project is based on Django Soft Dashboard
 
 # [Django Soft Dashboard](https://appseed.us/product/soft-ui-dashboard/django/)
 
-Open-source **[Django Dashboard](https://appseed.us/admin-dashboards/django/)** crafted on top of **Soft UI Dashboard**, an open-source `Bootstrap 5` design from `Creative-Tim`.
-Designed for those who like bold elements and beautiful websites. Made of hundreds of elements, designed blocks and fully coded pages, `Soft UI Dashboard` is ready to help you create stunning websites and web apps.
+Open-source **[Django Dashboard](https://appseed.us/admin-dashboards/django/)
+** crafted on top of **Soft UI Dashboard**, 
+an open-source `Bootstrap 5` design from `Creative-Tim`.
+Designed for those who like bold elements and beautiful websites. 
+Made of hundreds of elements, designed blocks and fully coded pages, 
+`Soft UI Dashboard` is ready to help you create stunning websites and web apps.
 
 - 👉 [Django Soft Dashboard](https://appseed.us/product/soft-ui-dashboard/django/) - `Product page`
 - 👉 [Django Soft Dashboard](https://django-soft-dash.onrender.com) - `LIVE Demo`
@@ -135,21 +148,6 @@ $success:       #82d616 !default;   // EDIT for customization
 $warning:       #fbcf33 !default;   // EDIT for customization 
 $danger:        #ea0606 !default;   // EDIT for customization 
 ```
-
-<br />
-
-## Deploy on [Render](https://render.com/)
-
-- Create a Blueprint instance
-  - Go to https://dashboard.render.com/blueprints this link.
-- Click `New Blueprint Instance` button.
-- Connect your `repo` which you want to deploy.
-- Fill the `Service Group Name` and click on `Update Existing Resources` button.
-- After that your deployment will start automatically.
-
-At this point, the product should be LIVE.
-
-<br />
 
 ## [Django Soft Dashboard](https://appseed.us/product/soft-ui-dashboard-pro/django/) `PRO`
 
