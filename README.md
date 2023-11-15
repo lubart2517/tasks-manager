@@ -1,4 +1,5 @@
 link to render https://tasks-manager-rslc.onrender.com/
+login: user password: useruser
 
 Task Manager can handle possible problems during product development in teams. 
 Everyone from the team can create Task, assign this Task to team-members, and mark 
