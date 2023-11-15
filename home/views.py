@@ -124,14 +124,7 @@ class TeamDetailView(LoginRequiredMixin, FormMixin, generic.DetailView):
     model = Team
     queryset = (
         Team.objects.all().
-        prefetch_related("projects", "teammates__position").
-        annotate(
-            team__projects__completed_tasks=(
-                Count("projects__tasks",
-                      filter=Q(projects__tasks__is_completed=True))
-            ),
-            team__projects__all_tasks=Count("projects__tasks")
-                    )
+        prefetch_related("projects", "teammates__position")
     )
 
     form_class = ProjectForm
